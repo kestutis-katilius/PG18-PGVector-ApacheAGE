@@ -1,7 +1,7 @@
 services:
   postgis:
     build: .
-    container_name: postgres
+    container_name: postgis_vector
     restart: always
 
     shm_size: '4gb'
