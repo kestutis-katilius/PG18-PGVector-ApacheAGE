@@ -19,7 +19,7 @@ RUN git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git \
 
 # ---- Apache AGE 1.7.0 ----
 WORKDIR /tmp
-RUN git clone --branch rel/1.7.0 https://github.com/apache/age.git \
+RUN git clone --branch release/PG18/1.7.0 https://github.com/apache/age.git \
     && cd age \
     && make PG_CONFIG=/usr/lib/postgresql/18/bin/pg_config \
     && make install
