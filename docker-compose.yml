@@ -1,0 +1,44 @@
+services:
+  postgis:
+    build: .
+    container_name: postgres
+    restart: always
+
+    shm_size: '4gb'
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_USER: kk
+      POSTGRES_DB: kk_db
+      POSTGRES_PASSWORD: campanula1980
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    deploy:
+      resources:
+        limits:
+          memory: 56G
+
+    command: >
+      postgres
+      -c shared_preload_libraries=age
+      -c shared_buffers=14GB
+      -c effective_cache_size=42GB
+      -c maintenance_work_mem=2GB
+      -c checkpoint_completion_target=0.9
+      -c wal_buffers=16MB
+      -c default_statistics_target=500
+      -c random_page_cost=1.1
+      -c work_mem=128MB
+      -c max_connections=100
+      -c max_worker_processes=28
+      -c max_parallel_workers_per_gather=14
+      -c max_parallel_workers=28
+
+volumes:
+  postgres_data:
+    name: postgres_data
